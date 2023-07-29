@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "app-11-hotel-booking"
+version = "0.1.0"
+description = ""
+authors = ["Ofir <ofirfirst@gmail.com>"]
+readme = "README.md"
+packages = [{include = "app_11_hotel_booking"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pandas = "^2.0.3"
+fpdf = "^1.7.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
