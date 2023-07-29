@@ -1,4 +1,5 @@
 import pandas
+from abc import ABC, abstractmethod
 
 df = pandas.read_csv("hotels.csv", dtype={"id": str})
 
@@ -25,7 +26,20 @@ class Hotel:
     def get_hotel_count(cls, data):
         return len(data)
 
-class ReservationTicket:
+    def __eq__(self, other):
+        if self.hotel_id == other.hotel_id:
+            return True
+        else:
+            return False
+
+
+class Ticket(ABC):
+
+    @abstractmethod
+    def generate(self):
+        pass
+
+class ReservationTicket(Ticket):
     def __init__(self, customer_name, hotel_object):
         self.customer_name = customer_name
         self.hotel = hotel_object
@@ -34,9 +48,20 @@ class ReservationTicket:
         content = f"""
         Thank you for your reservation!
         Here are you booking data:
-        Name: {self.customer_name}
+        Name: {self.the_customer_name}
         Hotel name: {self.hotel.name}
         """
         return content
+    @property
+    def the_customer_name(self):
+        name = self.customer_name.strip()
+        name = name.title()
+        return name
+    @staticmethod
+    def convert(amount):
+        return amount * 1.2
 
 
+
+ticket = ReservationTicket(customer_name="ofir zvi ", hotel_object="hotel")
+print(ticket.the_customer_name)
